@@ -13,11 +13,21 @@ wss.on('connection', ws => {
         ws.send(JSON.stringify({ address: '/cursor/move', args: message.args }));
     });
     osc.on('/position', (message) => {
-        console.log(message.args);
+        console.log('position',message.args);
     
         // Send OSC message data to the browser over WebSocket
         ws.send(JSON.stringify({ address: '/position', args: message.args }));
     });
+
+    osc.on('/click', message => {
+        console.log('click', message.args)
+        ws.send(JSON.stringify({ address: '/click', args: message.args }));
+    })
+
+    osc.on('/shoot', message => {
+        console.log('shoot', message.args)
+        ws.send(JSON.stringify({ address: '/shoot', args: message.args }));
+    })
     // osc.open({ port: 8080 })
 })
 
